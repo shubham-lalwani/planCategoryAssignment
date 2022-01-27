@@ -52,4 +52,7 @@ export class AppComponent implements OnInit {
     return !!this.dataService.NOTES.filter((obj) => obj.categoryId == id)
       .length;
   }
+  show(id) {
+    console.log(id);
+  }
 }

@@ -1,5 +1,5 @@
-<p>Plan Name: {{ planName }}</p>
-<p>Auther Name: {{ autherName }}</p>
+<h4>Plan Name: {{ planName }}</h4>
+<h4>Auther Name: {{ autherName }}</h4>
 
 <div *ngFor="let category of getSortedCategories()">
   <li
@@ -7,7 +7,7 @@
       category.parentNoteCategoryId == null && category.isArchived == false
     "
   >
-    {{ category.name }}
+    <span (click)="show(category.id)">{{ category.name }}</span>
     <div *ngIf="isNotesPresent(category.id)">
       <span>Notes</span>
       <ul *ngFor="let notes of getNotes(category.id)">
