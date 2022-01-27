@@ -1,4 +1,36 @@
-<hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
-</p>
+<p>Plan Name: {{ planName }}</p>
+<p>Auther Name: {{ autherName }}</p>
+
+<div *ngFor="let category of getSortedCategories()">
+  <li
+    *ngIf="
+      category.parentNoteCategoryId == null && category.isArchived == false
+    "
+  >
+    {{ category.name }}
+    <div *ngIf="isNotesPresent(category.id)">
+      <span>Notes</span>
+      <ul *ngFor="let notes of getNotes(category.id)">
+        <li>{{ notes.dateCreated }}:{{ notes.content }}</li>
+      </ul>
+    </div>
+    <ol>
+      <span *ngFor="let subCategory of subCategories">
+        <li
+          *ngIf="
+            subCategory.parentNoteCategoryId == category.id &&
+            subCategory.isArchived == false
+          "
+        >
+          {{ subCategory.name }}
+          <div>
+            <span>Notes</span>
+            <ul *ngFor="let notes of getNotes(subCategory.id)">
+              <li>{{ notes.dateCreated }}:{{ notes.content }}</li>
+            </ul>
+          </div>
+        </li>
+      </span>
+    </ol>
+  </li>
+</div>
